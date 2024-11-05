@@ -35,7 +35,7 @@ router.delete("/:postId/delete", middleware, async (req, res) => {
           msg: "Post deleted successfully"
       });
   } catch (error) {
-      console.error("Error deleting post:", error);
+    //   console.error("Error deleting post:", error);
       return res.status(500).json({
           msg: "An error occurred while attempting to delete the post",
           error

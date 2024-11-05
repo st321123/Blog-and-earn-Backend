@@ -40,7 +40,7 @@ router.post("/:userId/follow", middleware, async (req, res) => {
         }
     } catch (error) {
         await session.abortTransaction();
-        console.error("Error following/unfollowing user:", error);
+        // console.error("Error following/unfollowing user:", error);
         return res.status(500).json({ message: "Internal server error" });
     } finally {
         session.endSession();
@@ -72,7 +72,7 @@ router.get("/:id/followers", middleware, async (req, res) => {
             followingCount: followingsList.length,
         });
     } catch (error) {
-        console.error("Error fetching followers and following:", error);
+        // console.error("Error fetching followers and following:", error);
         res.status(500).json({ message: "Internal server error" });
     }
 });

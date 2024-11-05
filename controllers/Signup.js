@@ -22,7 +22,7 @@ router.post("/",async (req,res)=>{
     const {userName,password,email,bio,createdAt} = req.body;
     const response = userSchema.safeParse({userName:userName,password:password,email:email,bio:bio,createdAt:createdAt});
    
-    console.log("This is respo",response);
+    // console.log("This is respo",response);
     
     if(!response.success)
     {
@@ -43,7 +43,7 @@ router.post("/",async (req,res)=>{
     }
     catch(error)
     {
-        console.log(error);
+        // console.log(error);
         
         res.status(400).json({
             msg:error

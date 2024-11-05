@@ -12,6 +12,7 @@ router.get('/', async (req, res) => {
     try {
         const posts = await Post.find()
             .populate('author', 'userName bio')
+            .sort({ createdAt: -1 })
             .limit(Number(limit))
             .skip((Number(page) - 1) * Number(limit))
             .exec();
@@ -26,7 +27,7 @@ router.get('/', async (req, res) => {
             currentPage: Number(page),
         });
     } catch (error) {
-        console.error("Error fetching posts:", error);
+        // console.error("Error fetching posts:", error);
         res.status(400).json({
             msg: error.message
         });

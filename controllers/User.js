@@ -21,7 +21,7 @@ router.get('/',middleware, async (req, res) => {
         });
 
     } catch (error) {
-        console.error(error);
+        // console.error(error);
         res.status(400).json({
             msg: error.message
         });
@@ -71,7 +71,7 @@ router.post('/otherUser',middleware, async (req, res) => {
        
 
     } catch (error) {
-        console.error(error);
+        // console.error(error);
         res.status(400).json({
             msg: error.message
         });

@@ -54,7 +54,7 @@ router.post('/:postId/likes', middleware, async (req, res) => {
         return res.status(200).json({ msg: existingLike ? 'Post unliked' : 'Post liked', likeCount: post.likeCount });
     } catch (error) {
         await session.abortTransaction();
-        console.error("Error toggling like:", error);
+        // console.error("Error toggling like:", error);
         res.status(500).json({ msg: "Server error" });
     } finally {
         session.endSession();
@@ -84,7 +84,7 @@ router.get('/:postId/likes', middleware, async (req, res) => {
             alreadyExist:existingLike
         });
     } catch (error) {
-        console.error("Error fetching likes:", error);
+        // console.error("Error fetching likes:", error);
         return res.status(500).json({ msg: "Internal server error" });
     }
 });

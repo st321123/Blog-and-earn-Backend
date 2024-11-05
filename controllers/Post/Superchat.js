@@ -72,7 +72,7 @@ router.post("/:postId/transfer", middleware, async (req, res) => {
         res.status(201).json({ message: "Superchat sent successfully", transaction });
     } catch (error) {
         await session.abortTransaction();
-        console.error("Error processing transaction:", error);
+        // console.error("Error processing transaction:", error);
         res.status(500).json({ message: "Transaction failed" });
     } finally {
         session.endSession();
@@ -114,7 +114,7 @@ router.get("/:senderID/transactions", middleware, async (req, res) => {
             
         res.status(200).json({ transactionsSend, transactionsRecieved });
     } catch (error) {
-        console.error("Error fetching transactions:", error);
+        // console.error("Error fetching transactions:", error);
         res.status(500).json({ message: "Failed to retrieve transactions" });
     }
 });

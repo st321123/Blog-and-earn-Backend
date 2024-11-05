@@ -15,7 +15,7 @@ router.get('/:postId/comments', middleware, async (req, res) => {
         
         res.status(200).json({ comments });
     } catch (error) {
-        console.error("Error fetching comments:", error);
+        // console.error("Error fetching comments:", error);
         res.status(500).json({ msg: "Server error" });
     }
 });
@@ -43,7 +43,7 @@ router.post('/:postId/comments',middleware, async (req, res) => {
         
         res.status(201).json({ comment });
     } catch (error) {
-        console.error("Error adding comment:", error);
+        // console.error("Error adding comment:", error);
         res.status(500).json({ msg: "Server error" });
     }
 });
@@ -61,7 +61,7 @@ router.delete('/:postId/comments/:commentId',middleware, async (req, res) => {
 
         res.status(200).json({ msg: "Comment deleted successfully" });
     } catch (error) {
-        console.error("Error deleting comment:", error);
+        // console.error("Error deleting comment:", error);
         res.status(500).json({ msg: "Server error" });
     }
 });
