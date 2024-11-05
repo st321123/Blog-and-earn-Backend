@@ -49,21 +49,36 @@ router.post('/:postId/comments',middleware, async (req, res) => {
 });
 
 // Route to delete a comment
-router.delete('/:postId/comments/:commentId',middleware, async (req, res) => {
+router.delete('/:postId/comments/:commentId', middleware, async (req, res) => {
     const { postId, commentId } = req.params;
+    const userEmail = req.id; // Email from middleware
 
     try {
-        const result = await Comment.findOneAndDelete({ _id: commentId, postId });
+        // Fetch the post to verify if the user is the post author
+        const post = await Post.findById(postId).populate('author');
+        if (!post) {
+            return res.status(404).json({ msg: "Post not found" });
+        }
 
-        if (!result) {
+        // Fetch the comment to verify if the user is the comment author
+        const comment = await Comment.findById(commentId).populate('userId');
+        if (!comment) {
             return res.status(404).json({ msg: "Comment not found" });
         }
 
+        // Check if the user is either the post author or the comment author
+        if (post.author.email !== userEmail && comment.userId.email !== userEmail) {
+            return res.status(403).json({ msg: "Unauthorized action" });
+        }
+
+        // Delete the comment if authorization is successful
+        await Comment.findByIdAndDelete(commentId);
         res.status(200).json({ msg: "Comment deleted successfully" });
     } catch (error) {
-        // console.error("Error deleting comment:", error);
+        console.error("Error deleting comment:", error);
         res.status(500).json({ msg: "Server error" });
     }
 });
 
+module.exports = router;
 module.exports = router;
