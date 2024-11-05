@@ -21,27 +21,33 @@ router.get("/",middleware, async (req,res)=>{
     
     
     const db = await Post.find({author:userDetails._id});
-  
+    
+
+
+   
     
   
     
     if(!db.length)
     {
-       return res.status(400).json({
-            msg:"No posts "
+       return res.status(200).json({
+        userDetails,
+        db,
+        msg:"No posts "
         })
     }
  
     return  res.status(200).json({
     db,
-    userName,
+    userDetails,
     msg:"Success"
     })
   }
   catch(er)
   {
     res.status(404).json({
-        msg:"Internal server error"
+        msg:"Internal server error",
+        userName
     })
   }
 })
