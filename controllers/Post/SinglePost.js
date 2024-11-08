@@ -54,7 +54,7 @@ router.get("/:postId",middleware, async (req,res)=>{
   
   try{
   
-  const db = await Post.find({_id: postId}).populate('author', 'author').exec();
+  const db = await Post.find({_id: postId}).populate('author', 'userName').exec();
  
   if(!db.length)
   {

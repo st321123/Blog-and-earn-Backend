@@ -5,6 +5,7 @@ app.use(express.json());
 
 const router = express.Router();
 
+
 // allPost.js
 router.get('/', async (req, res) => {
     const { page = 1, limit = 6 } = req.query;
